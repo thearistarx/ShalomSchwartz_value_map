@@ -59,7 +59,7 @@ ggplot(data = NMDS, aes(MDS1*10, MDS2*10)) +
   theme_void() +
   theme(aspect.ratio = 1) 
 
-# save as png
+## save as png
 ggsave(
   "plotSchwartzMap.png",
   device = "png",
