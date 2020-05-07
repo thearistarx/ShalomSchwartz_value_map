@@ -5,7 +5,7 @@ library("RColorBrewer")
 library("ggrepel")
 library("ggalt")
 
-# reading
+## reading
 dataValues <- read_excel("cultvalueorientationscores.xls")
 
 # subset and log transformation of values
