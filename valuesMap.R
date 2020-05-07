@@ -4,6 +4,8 @@ library("vegan")
 library("RColorBrewer")
 library("ggrepel")
 library("ggalt")
+library("ggforce")
+library("concaveman")
 
 ## reading
 dataValues <- read_excel("cultvalueorientationscores.xls")
@@ -30,13 +32,16 @@ newColors <- brewer.pal(n = 7, name = "Set1")
 
 # plot
 ggplot(data = NMDS, aes(MDS1*10, MDS2*10)) + 
-  stat_ellipse(geom = "polygon", alpha = 0.5, aes(fill = as.factor(profile))) +
+  #stat_ellipse(geom = "polygon", alpha = 0.5, aes(fill = as.factor(profile))) +
+  geom_mark_hull(aes(fill = as.factor(profile)), alpha = 0.2, colour = NA,
+                 expand = unit(3, "mm"), 
+                  concavity = 1) +
   #geom_encircle(alpha = 0.5, aes(fill = as.factor(profile))) +
-  geom_segment(data=vec.sp.df,aes(x=0,xend=MDS1,y=0,yend=MDS2), arrow = arrow(length = unit(0.1, "cm")), colour=newColors) + 
- geom_label_repel(aes(label = dataValues$label)) + 
+  geom_segment(data = vec.sp.df,aes(x = 0,xend = MDS1,y = 0,yend=MDS2), arrow = arrow(length = unit(0.1, "cm")), colour=newColors) + 
+  geom_label_repel(aes(label = dataValues$label)) + 
   geom_point(aes(color = as.factor(profile))) +
   #geom_polygon(aes(color = as.factor(profile)), alpha = 0.1) +
-  geom_text_repel(data=vec.sp.df,aes(x=MDS1,y=MDS2,label=species),size=5) +
+  geom_text_repel(data = vec.sp.df,aes(x = MDS1,y = MDS2,label = species),size = 5) +
   theme_void() +
   theme(aspect.ratio = 1) 
 
