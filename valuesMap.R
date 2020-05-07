@@ -6,6 +6,7 @@ library("ggrepel")
 library("ggalt")
 library("ggforce")
 library("concaveman")
+set.seed(42)
 
 ## reading
 dataValues <- read_excel("cultvalueorientationscores.xls")
@@ -39,27 +40,22 @@ NMDS$profile <- dataValues$profile
 # plot
 ggplot(data = NMDS, aes(MDS1*10, MDS2*10)) + 
   #stat_ellipse(geom = "polygon", alpha = 0.5, aes(fill = as.factor(profile))) +
-<<<<<<< HEAD
-  geom_mark_hull(aes(fill = as.factor(profile)), alpha = 0.2, colour = NA,
+  geom_mark_hull(aes(fill = as.factor(profile)), alpha = 0.08, colour = NA,
                  expand = unit(3, "mm"), 
                   concavity = 1) +
   #geom_encircle(alpha = 0.5, aes(fill = as.factor(profile))) +
-  geom_segment(data = vec.sp.df,aes(x = 0,xend = MDS1,y = 0,yend=MDS2), arrow = arrow(length = unit(0.1, "cm")), colour=newColors) + 
-=======
-  #geom_encircle(alpha = 0.5, aes(fill = as.factor(profile))) +
+  geom_point(aes(color = as.factor(profile)), size = 3) +
   geom_segment(data=vec.sp.df,
-    aes(x=0,xend=MDS1,y=0,yend=MDS2),
+    aes(x = 0,xend = MDS1*1.5,y = 0, yend= MDS2*1.5),
     lineend = "butt",
     linejoin = "mitre",
-    size = 1, 
-    arrow = arrow(length = unit(0.5, "cm"))
-    #, colour=newColors
+    size = 0.5, 
+    arrow = arrow(length = unit(0.2, "cm")),
+    colour="grey"
     ) + 
->>>>>>> dae92d1434a936af264f4ff0b010fec285e7f3f8
-  geom_label_repel(aes(label = dataValues$label)) + 
-  geom_point(aes(color = as.factor(profile))) +
+  geom_label_repel(aes(label = dataValues$label), label.size = NA, fill = NA) + 
   #geom_polygon(aes(color = as.factor(profile)), alpha = 0.1) +
-  geom_text_repel(data = vec.sp.df,aes(x = MDS1,y = MDS2,label = species),size = 5) +
+  geom_text_repel(data = vec.sp.df,aes(x = MDS1*1.6, y = MDS2*1.6, label = species),size = 5) +
   theme_void() +
   theme(aspect.ratio = 1) 
 
