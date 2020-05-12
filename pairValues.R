@@ -1,12 +1,14 @@
 library("readxl")
 library("ggplot2")
+library("ggrepel")
 
 # reading
 dataValues <- read_excel("cultvalueorientationscores.xls")
 
 # plot - Embeddedness/Autonomy
-ggplot(dataValues, aes(x = embedded, y = auton)) + 
-  geom_point(aes(color = as.factor(profile)), size = 2) +
+ggplot(dataValues, aes(x = embedded, y = auton, label = label)) + 
+  geom_smooth(method = "lm", se = FALSE, color = "grey", size = 0.5) +
+  geom_text_repel(aes(color = as.factor(profile)), size = 1.5, segment.size = 0.1) +
   xlim(NA, 5) +
   ylim(NA, 5) +
   theme_minimal() +
@@ -30,8 +32,9 @@ ggsave(
 #-------------------------------------------------------
 
 # plot - Hierarchy/Egalitarianism
-ggplot(dataValues, aes(x = hierarchy, y = egalitar)) + 
-  geom_point(aes(color = as.factor(profile)), size = 2) +
+ggplot(dataValues, aes(x = hierarchy, y = egalitar, label = label)) + 
+  geom_smooth(method = "lm", se = FALSE, color = "grey", size = 0.5) +
+  geom_text_repel(aes(color = as.factor(profile)), size = 1.5, segment.size = 0.1) +
   #xlim(NA, 4) +
   #ylim(NA, 5.4) +
   theme_minimal() +
@@ -55,8 +58,9 @@ ggsave(
 #-------------------------------------------------------
 
 # plot - Mastery/Harmony
-ggplot(dataValues, aes(x = mastery, y = harmony)) + 
-  geom_point(aes(color = as.factor(profile)), size = 2) +
+ggplot(dataValues, aes(x = mastery, y = harmony, label = label)) + 
+  geom_smooth(method = "lm", se = FALSE, color = "grey", size = 0.5) +
+  geom_text_repel(aes(color = as.factor(profile)), size = 1.5, segment.size = 0.1) +
   xlim(NA, 4.5) +
   ylim(NA, 4.8) +
   theme_minimal() +
