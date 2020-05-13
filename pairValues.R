@@ -29,7 +29,7 @@ ggsave(
   dpi = 500
 )
 
-#-------------------------------------------------------
+#--------------------------------------------------------
 
 # plot - Hierarchy/Egalitarianism
 ggplot(dataValues, aes(x = hierarchy, y = egalitar, label = label)) + 
@@ -55,7 +55,7 @@ ggsave(
   dpi = 500
 )
 
-#-------------------------------------------------------
+#--------------------------------------------------------
 
 # plot - Mastery/Harmony
 ggplot(dataValues, aes(x = mastery, y = harmony, label = label)) + 
